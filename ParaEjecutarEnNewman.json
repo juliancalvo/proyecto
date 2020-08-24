@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "28a21ba0-2837-49f7-9252-4ffba6609e45",
+		"name": "ParaEjecutarEnNewman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Newman",
+			"item": [
+				{
+					"name": "Test_1-Validar json Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d3577c76-9211-4a1b-8726-e7fa9b100008",
+								"exec": [
+									"pm.test(\"Comprobamos Json\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    console.log(jsonData);\r",
+									"    pm.expect(jsonData.url).to.eql(\"https://postman-echo.com/post\");\r",
+									"    pm.expect(jsonData.data.nombre).to.eql(\"Julian\");\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Comprobamos si codigo 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Julian\",\r\n    \"apellido\": \"Calvo\",\r\n    \"edad\": 52\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test_2-Validar tiempo ejecucion servicio Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "69571bc5-db75-4599-9395-dee94b29dc16",
+								"exec": [
+									"pm.test(\"Response time is less than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{VarEntornoUrl}}/delay/2",
+							"host": [
+								"{{VarEntornoUrl}}"
+							],
+							"path": [
+								"delay",
+								"2"
+							]
+						},
+						"description": "Retrasa la respuesta un tiempo para comprobar como se comporta la aplicacion ante un retraso de respuesta del servidor por ejemplo"
+					},
+					"response": []
+				},
+				{
+					"name": "Test_3-Comprueba texto Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a575c8c-bb65-47ff-b44d-07ce26b75743",
+								"exec": [
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"deflate\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://postman-echo.com/get",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test_4-Comprobar respuesta completa Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55514dfc-5e25-4469-bdcd-df00f34f8c9d",
+								"exec": [
+									"pm.test(\"Body is correct\", function () {\r",
+									"    pm.response.to.have.body('\"{\"delay\": \"2\"}');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{VarEntornoUrl}}/delay/2",
+							"host": [
+								"{{VarEntornoUrl}}"
+							],
+							"path": [
+								"delay",
+								"2"
+							]
+						},
+						"description": "Retrasa la respuesta un tiempo para comprobar como se comporta la aplicacion ante un retraso de respuesta del servidor por ejemplo"
+					},
+					"response": []
+				},
+				{
+					"name": "Test_5-Comprobamos si campo es tipo string Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8ce03ada-1416-479b-bf5e-5a025f54d78b",
+								"exec": [
+									"pm.test(\"Comprobamos respuesta si es tipo string\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    console.log(jsonData);\r",
+									"    pm.expect(jsonData.json.nombre).to.be.a('string');\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Julian\",\r\n    \"apellido\": \"Calvo\",\r\n    \"edad\": 52\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test_6-Error para informe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ddcce57-b931-43af-b46f-f950b1a2e32c",
+								"exec": [
+									"cacota4"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{VarEntornoUrl}}/get",
+							"host": [
+								"{{VarEntornoUrl}}"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test_7-Error para informe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "cfb75612-cdcd-48d9-ace6-13efc4e8bf9f",
+								"exec": [
+									"cacota5"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{VarEntornoUrl}}/get",
+							"host": [
+								"{{VarEntornoUrl}}"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
